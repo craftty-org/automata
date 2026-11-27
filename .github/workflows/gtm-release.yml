@@ -63,7 +63,7 @@ jobs:
           repository: craftty-org/gtm
           ref: ${{ github.event.client_payload.sha }}
           fetch-depth: 0
-          token: ${{ secrets.CRAFTTY_REPO_TOKEN }}
+          token: ${{ secrets.AUTOMATA_DISPATCH_TOKEN }}
 
       - name: Checkout automata scripts
         uses: actions/checkout@v7
@@ -204,7 +204,7 @@ jobs:
           git config user.email "prjctimg@outlook.com"
           tag="${{ steps.set-tag.outputs.tag }}"
           git tag -f "${tag}"
-          git push "https://x-access-token:${{ secrets.CRAFTTY_REPO_TOKEN }}@github.com/${TARGET_REPO}.git" "${tag}" --force
+          git push "https://x-access-token:${{ secrets.AUTOMATA_DISPATCH_TOKEN }}@github.com/${TARGET_REPO}.git" "${tag}" --force
 
   build:
     needs: tag
@@ -656,7 +656,7 @@ jobs:
           repository: craftty-org/gtm
           ref: ${{ github.event.client_payload.sha }}
           fetch-depth: 0
-          token: ${{ secrets.CRAFTTY_REPO_TOKEN }}
+          token: ${{ secrets.AUTOMATA_DISPATCH_TOKEN }}
 
       - name: Checkout automata scripts
         uses: actions/checkout@v7
@@ -671,7 +671,7 @@ jobs:
 
       - name: Generate release-notes draft
         env:
-          GH_TOKEN: ${{ secrets.CRAFTTY_REPO_TOKEN }}
+          GH_TOKEN: ${{ secrets.AUTOMATA_DISPATCH_TOKEN }}
         run: |
           tag="${{ needs.tag.outputs.tag }}"
           version="${{ needs.tag.outputs.version }}"
@@ -713,7 +713,7 @@ jobs:
       - uses: softprops/action-gh-release@v3
         with:
           repository: craftty-org/gtm
-          token: ${{ secrets.CRAFTTY_REPO_TOKEN }}
+          token: ${{ secrets.AUTOMATA_DISPATCH_TOKEN }}
           tag_name: ${{ needs.tag.outputs.tag }}
           name: ${{ needs.tag.outputs.version }}
           draft: false
@@ -731,7 +731,7 @@ jobs:
       - name: Prune stale nightly assets
         if: needs.tag.outputs.nightly == 'true'
         env:
-          GH_TOKEN: ${{ secrets.CRAFTTY_REPO_TOKEN }}
+          GH_TOKEN: ${{ secrets.AUTOMATA_DISPATCH_TOKEN }}
         run: |
           mapfile -t kept < <(
             ls gtm-*.tar.gz *.deb *.rpm *.pkg.tar.zst *.apk \
@@ -747,7 +747,7 @@ jobs:
       - name: Force-publish nightly (draft guard)
         if: always() && needs.tag.outputs.nightly == 'true'
         env:
-          GH_TOKEN: ${{ secrets.CRAFTTY_REPO_TOKEN }}
+          GH_TOKEN: ${{ secrets.AUTOMATA_DISPATCH_TOKEN }}
         run: |
           # `releases/tags/nightly` is GET-only; the old PATCH against it 404'd
           # on every run and the `|| echo` hid it. `gh release edit` looks the
@@ -780,7 +780,7 @@ jobs:
           repository: craftty-org/gtm
           ref: ${{ github.event.client_payload.sha }}
           fetch-depth: 0
-          token: ${{ secrets.CRAFTTY_REPO_TOKEN }}
+          token: ${{ secrets.AUTOMATA_DISPATCH_TOKEN }}
 
       - name: Checkout automata scripts
         uses: actions/checkout@v7
@@ -846,7 +846,7 @@ jobs:
       - name: Commit benchmark results back (dev only)
         if: github.event.client_payload.ref == 'refs/heads/dev'
         env:
-          GH_BOT_TOKEN: ${{ secrets.CRAFTTY_REPO_TOKEN }}
+          GH_BOT_TOKEN: ${{ secrets.AUTOMATA_DISPATCH_TOKEN }}
         shell: bash
         run: |
           set -euo pipefail
@@ -946,7 +946,7 @@ jobs:
       - uses: actions/checkout@v7
       - name: Close issues mentioned in release
         env:
-          GH_TOKEN: ${{ secrets.CRAFTTY_BOT_TOKEN }}
+          GH_TOKEN: ${{ secrets.AUTOMATA_DISPATCH_TOKEN }}
           REPO: craftty-org/gtm
           TAG: ${{ needs.tag.outputs.tag }}
         run: node scripts/bot/close-mentioned-issues.mjs --repo "$REPO" --tag "$TAG"

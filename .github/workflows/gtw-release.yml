@@ -52,7 +52,7 @@ jobs:
           repository: craftty-org/gtw
           ref: ${{ github.event.client_payload.sha }}
           fetch-depth: 0
-          token: ${{ secrets.CRAFTTY_REPO_TOKEN }}
+          token: ${{ secrets.AUTOMATA_DISPATCH_TOKEN }}
       - name: Derive and move tag
         id: set-tag
         env:
@@ -80,7 +80,7 @@ jobs:
           git config user.name "prjctimg"
           git config user.email "prjctimg@outlook.com"
           git tag -f "$tag"
-          git push "https://x-access-token:${{ secrets.CRAFTTY_REPO_TOKEN }}@github.com/${TARGET_REPO}.git" "$tag" --force
+          git push "https://x-access-token:${{ secrets.AUTOMATA_DISPATCH_TOKEN }}@github.com/${TARGET_REPO}.git" "$tag" --force
           echo "tag=${tag}" >> "$GITHUB_OUTPUT"
           echo "version=${version}" >> "$GITHUB_OUTPUT"
 
@@ -385,7 +385,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           repository: craftty-org/gtw
-          token: ${{ secrets.CRAFTTY_REPO_TOKEN }}
+          token: ${{ secrets.AUTOMATA_DISPATCH_TOKEN }}
           tag_name: ${{ needs.tag.outputs.tag }}
           name: gtw ${{ needs.tag.outputs.version }}
           generate_release_notes: true
@@ -408,7 +408,7 @@ jobs:
       - uses: actions/checkout@v7
       - name: Close issues mentioned in release
         env:
-          GH_TOKEN: ${{ secrets.CRAFTTY_BOT_TOKEN }}
+          GH_TOKEN: ${{ secrets.AUTOMATA_DISPATCH_TOKEN }}
           REPO: craftty-org/gtw
           TAG: ${{ needs.tag.outputs.tag }}
         run: node scripts/bot/close-mentioned-issues.mjs --repo "$REPO" --tag "$TAG"

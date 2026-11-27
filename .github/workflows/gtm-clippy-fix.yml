@@ -51,7 +51,7 @@ jobs:
         with:
           repository: craftty-org/gtm
           ref: ${{ github.event.client_payload.sha }}
-          token: ${{ secrets.CRAFTTY_REPO_TOKEN }}
+          token: ${{ secrets.AUTOMATA_DISPATCH_TOKEN }}
           fetch-depth: 0
       - uses: dtolnay/rust-toolchain@stable
         with:
@@ -72,7 +72,7 @@ jobs:
         if: success()
         shell: bash
         env:
-          GH_BOT_TOKEN: ${{ secrets.CRAFTTY_REPO_TOKEN }}
+          GH_BOT_TOKEN: ${{ secrets.AUTOMATA_DISPATCH_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -87,7 +87,7 @@ jobs:
         if: failure()
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.CRAFTTY_REPO_TOKEN }}
+          token: ${{ secrets.AUTOMATA_DISPATCH_TOKEN }}
           commit-message: "style: apply clippy auto-fixes"
           title: "style: apply clippy auto-fixes"
           body: |

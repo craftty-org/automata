@@ -39,7 +39,7 @@ jobs:
           ref: ${{ github.event.client_payload.sha }}
           fetch-depth: 0
           path: target
-          token: ${{ secrets.CRAFTTY_REPO_TOKEN }}
+          token: ${{ secrets.AUTOMATA_DISPATCH_TOKEN }}
       - name: Regenerate contributors in README
         run: |
           REPO_ROOT="$GITHUB_WORKSPACE/target" bash "$GITHUB_WORKSPACE/automata/scripts/contributors.sh" "$GITHUB_WORKSPACE/target/README.md"

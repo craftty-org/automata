@@ -53,7 +53,7 @@ jobs:
           repository: craftty-org/gtw
           ref: ${{ github.event.client_payload.sha }}
           fetch-depth: 0
-          token: ${{ secrets.CRAFTTY_REPO_TOKEN }}
+          token: ${{ secrets.AUTOMATA_DISPATCH_TOKEN }}
       - name: Derive nightly tag
         id: set-tag
         run: |
@@ -65,7 +65,7 @@ jobs:
           git config user.name "prjctimg"
           git config user.email "prjctimg@outlook.com"
           git tag -f "$tag"
-          git push "https://x-access-token:${{ secrets.CRAFTTY_REPO_TOKEN }}@github.com/${TARGET_REPO}.git" "$tag" --force
+          git push "https://x-access-token:${{ secrets.AUTOMATA_DISPATCH_TOKEN }}@github.com/${TARGET_REPO}.git" "$tag" --force
           echo "tag=${tag}" >> "$GITHUB_OUTPUT"
           echo "version=${version}" >> "$GITHUB_OUTPUT"
 
@@ -370,7 +370,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           repository: craftty-org/gtw
-          token: ${{ secrets.CRAFTTY_REPO_TOKEN }}
+          token: ${{ secrets.AUTOMATA_DISPATCH_TOKEN }}
           tag_name: nightly
           name: gtw nightly
           prerelease: true

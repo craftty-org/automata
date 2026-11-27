@@ -50,7 +50,7 @@ jobs:
         env:
           TARGET_REPO: craftty-org/gtm.nvim
         with:
-          github-token: ${{ secrets.CRAFTTY_REPO_TOKEN }}
+          github-token: ${{ secrets.AUTOMATA_DISPATCH_TOKEN }}
           script: |
             const fs = require('fs');
             const body = fs.readFileSync('what-changed.md', 'utf8');
