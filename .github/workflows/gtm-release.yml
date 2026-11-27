@@ -118,7 +118,11 @@ jobs:
             nightly="true"
           else
             echo "skip=false" >> "$GITHUB_OUTPUT"
-            tag="${GITHUB_REF_NAME}"
+            if [[ "$REF" == refs/tags/* ]]; then
+              tag="${REF#refs/tags/}"
+            else
+              tag="${GITHUB_REF_NAME}"
+            fi
             version="${tag#v}"
             nightly="false"
           fi
