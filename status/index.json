@@ -1,6 +1,22 @@
 {
-  "generated_at": "2026-11-27T11:52:33.901Z",
+  "generated_at": "2026-11-27T11:53:47.511Z",
   "runs": [
+    {
+      "repo": "craftty-org/gtm",
+      "workflow": "gtm-ci",
+      "run_id": "45994096517",
+      "run_number": 19,
+      "event": "push",
+      "ref": "refs/tags/nightly",
+      "sha": "e75263aef62a42444de835443d27838a4c199d5c",
+      "status": "in_progress",
+      "conclusion": "",
+      "actor": "prjctimg",
+      "html_url": "https://github.com/craftty-org/automata/actions/runs/45994096517",
+      "created_at": "2026-11-27T11:53:47.488Z",
+      "updated_at": "2026-11-27T11:53:47.488Z",
+      "path": "status/runs/craftty-org_gtm/45994096517.json"
+    },
     {
       "repo": "craftty-org/gtm",
       "workflow": "gtm-clippy-fix",
