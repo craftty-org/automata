@@ -45,14 +45,20 @@ jobs:
           REPO_ROOT="$GITHUB_WORKSPACE/target" bash "$GITHUB_WORKSPACE/automata/scripts/contributors.sh" "$GITHUB_WORKSPACE/target/README.md"
       - name: Commit if changed
         working-directory: target
+        env:
+          TARGET_REF: ${{ github.event.client_payload.ref }}
         run: |
           set -euo pipefail
           if git diff --quiet README.md; then echo "README already lists every contributor"; exit 0; fi
+          branch="main"
+          if [[ "${TARGET_REF:-}" == refs/heads/* ]]; then
+            branch="${TARGET_REF#refs/heads/}"
+          fi
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add README.md
           git commit -m "docs: update contributors [skip nightly] [skip ci]"
-          git push
+          git push origin "HEAD:${branch}"
   status-finish:
     if: always()
     needs: [status-start, contributors]
