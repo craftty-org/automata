@@ -1,0 +1,16 @@
+{
+  "repo": "craftty-org/automata",
+  "workflow": "craftty-bot-stale",
+  "run_id": "46140870693",
+  "run_attempt": 1,
+  "run_number": 1,
+  "event": "schedule",
+  "ref": "refs/heads/main",
+  "sha": "90f2b955ef13ab4fd06852a5757b8c0ac8d80b19",
+  "status": "in_progress",
+  "conclusion": "",
+  "actor": "prjctimg",
+  "html_url": "https://github.com/craftty-org/automata/actions/runs/46140870693",
+  "created_at": "2026-11-28T11:39:04.481Z",
+  "updated_at": "2026-11-28T11:39:04.481Z"
+}
