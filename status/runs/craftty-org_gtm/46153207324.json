@@ -1,0 +1,16 @@
+{
+  "repo": "craftty-org/gtm",
+  "workflow": "gtm-ci",
+  "run_id": "46153207324",
+  "run_attempt": 1,
+  "run_number": 30,
+  "event": "push",
+  "ref": "refs/heads/main",
+  "sha": "c85af2138547dc86b1f4c91b0e9c547c6064a80a",
+  "status": "in_progress",
+  "conclusion": "",
+  "actor": "prjctimg",
+  "html_url": "https://github.com/craftty-org/automata/actions/runs/46153207324",
+  "created_at": "2026-11-28T14:09:38.459Z",
+  "updated_at": "2026-11-28T14:09:38.459Z"
+}
